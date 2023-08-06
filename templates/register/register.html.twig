@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="formContainer">
+        <h1 class="formHeader">Rejestracja</h1>
+        <form method="POST" action="{{ path('app_register_submit') }}">
+            {% include '/components/_input.html.twig' with {
+                name: 'login',
+                placeholder: 'Login',
+                type: 'text'
+            } %}
+
+            {% include '/components/_input.html.twig' with {
+                name: 'email',
+                placeholder: 'Email',
+                type: 'email'
+            } %}
+
+            {% include '/components/_input.html.twig' with {
+                name: 'password',
+                placeholder: 'Hasło',
+                type: 'password'
+            } %}
+
+            {% include '/components/_button.html.twig'  with {
+                text: 'Zarejestruj się'
+            }%}
+
+            <a href="{{ path('app_login_login') }}">Logowanie</a>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block title %}
+    Rejestracja
+{% endblock %}
+

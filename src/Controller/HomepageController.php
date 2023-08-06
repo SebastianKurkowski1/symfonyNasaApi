@@ -16,7 +16,9 @@ class HomepageController extends AbstractController
         if ($login->checkIfLoggedIn($request)) {
             return $this->render('homepage/homepage.html.twig');
         } else {
-            return $this->render('homepage/login.html.twig');
+            return $this->forward('App\Controller\LoginController::login', [
+                'request'  => $request,
+            ]);
         }
 
     }
