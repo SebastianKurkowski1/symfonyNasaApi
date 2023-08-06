@@ -1,7 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="formContainer">
+        <h1 class="formHeader">Logowanie</h1>
+        <form>
+            {% include '/components/_input.html.twig' with {
+                name: 'login',
+                placeholder: 'Login',
+                type: 'text'
+            } %}
 
+            {% include '/components/_input.html.twig' with {
+                name: 'password',
+                placeholder: 'Hasło',
+                type: 'password'
+            } %}
+
+            {% include '/components/_button.html.twig'  with {
+                text: 'Zaloguj się'
+            }%}
+
+            <a>Rejestracja</a>
+        </form>
+
+    </div>
 {% endblock %}
 
 {% block title %}

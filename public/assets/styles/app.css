@@ -1,0 +1,163 @@
+/* Reset */
+html {
+    box-sizing: border-box;
+    font-size: 10px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    border-style: none;
+    background: transparent;
+    outline: none;
+}
+
+button {
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Some basic page styles */
+body {
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-image: radial-gradient(circle at 0% 0%, #090202, #050511 51%, rgb(7, 1, 1));
+}
+
+.formContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.formHeader {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 3rem;
+    font-family: "system-ui", sans-serif;
+}
+
+.button {
+    padding: 10px;
+    font-size: 1.8rem;
+    color: var(--input-text-inactive);
+    cursor: pointer;
+    border: 2px solid var(--input-text-inactive);
+    border-radius: 3px;
+    transition-duration: 0.5s;
+}
+
+.button:hover {
+    color: var(--input-text-active);
+}
+
+form {
+    background-color: rgba(57, 63, 84, 0.4);
+    padding: 50px 20px;
+    border-radius: 3px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+a {
+    margin: -0.5rem auto -2.5rem 10px;
+    color: var(--input-text-inactive);
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+a:hover {
+    color: var(--input-text-active);
+}
+
+@media only screen and (max-width: 600px) {
+    form {
+        padding: 20px;
+    }
+}
+
+
+
+/* Colors */
+/* Assuming you'll use CSS custom properties or variables */
+:root {
+    --input-background: rgba(57, 63, 84, 0.4);
+    --input-text-inactive: #7881A1;
+    --input-text-active: #BFD2FF;
+}
+
+/* Gradient animation */
+@keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.webflow-style-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 2px;
+    padding: 1.4rem 2rem 1.6rem;
+    background: var(--input-background);
+}
+
+.webflow-style-input:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 999;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+    background-size: 500% auto;
+    animation: gradient 3s linear infinite;
+}
+
+.webflow-style-input input {
+    flex-grow: 1;
+    color: var(--input-text-active);
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    vertical-align: middle;
+}
+
+.webflow-style-input input::-webkit-input-placeholder {
+    color: var(--input-text-inactive);
+}
