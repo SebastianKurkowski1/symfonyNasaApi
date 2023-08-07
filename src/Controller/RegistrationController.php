@@ -62,6 +62,8 @@ class RegistrationController extends AbstractController
                 );
                 // do anything else you need here, like send an email
 
+                $this->addFlash('info', 'Wysłano maila z linkiem aktywacyjnym na podany adres.');
+
                 return $this->redirectToRoute('app_homepage_homepage');
             }
         }
@@ -95,7 +97,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', 'Pomyślnie zweryfikowano adres email.');
+        $this->addFlash('success', "Pomyślnie zweryfikowano adres email. \n\n Teraz możesz się zalogować.");
 
         return $this->redirectToRoute('app_homepage_homepage');
     }

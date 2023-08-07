@@ -1,4 +1,6 @@
 /* Reset */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
 html {
     box-sizing: border-box;
     font-size: 10px;
@@ -85,25 +87,29 @@ form {
     gap: 2.5rem;
 }
 
-a {
+form a {
     margin: -0.5rem auto -2.5rem 10px;
     color: var(--input-text-inactive);
     cursor: pointer;
     font-size: 1.3rem;
 }
 
+.flashMessagesContainer {
+    font-size: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.flashMessagesContainer .alert {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 a:hover {
     color: var(--input-text-active);
 }
 
-.alert {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-}
-.alert-danger {
-    background-color: red;
-}
 
 @media only screen and (max-width: 600px) {
     form {
