@@ -15,7 +15,6 @@ class LoginController extends AbstractController
     public function login(Request $request, EntityManagerInterface $entityManager): Response
     {
         $users = $entityManager->getRepository(User::class)->findAll();
-        dd($users);
         return $this->render('login/login.html.twig');
     }
 }

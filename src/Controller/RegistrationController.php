@@ -55,9 +55,9 @@ class RegistrationController extends AbstractController
                 // generate a signed url and email it to the user
                 $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                     (new TemplatedEmail())
-                        ->from(new Address('nasaapi@nasaapi.pl', 'Community nasa api data provider'))
+                        ->from(new Address('nasaapi@nasaapi.pl', 'Nasa API'))
                         ->to($user->getEmail())
-                        ->subject('Please Confirm your Email')
+                        ->subject('Proszę potwierdzić swój adres email')
                         ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
                 // do anything else you need here, like send an email
