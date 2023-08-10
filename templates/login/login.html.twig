@@ -5,7 +5,7 @@
         <h1 class="formHeader">Logowanie</h1>
         <form action="{{ path('app_login') }}" method="post">
             {% include '/components/_input.html.twig' with {
-                name: '_username',
+                name: '_email',
                 placeholder: 'Email',
                 type: 'text'
             } %}
@@ -23,14 +23,6 @@
             <a href="{{ path('app_register') }}">Rejestracja</a>
         </form>
     </div>
-    {% block flash_messages %}
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endif %}
-    {% endblock %}
 {% endblock %}
 
 {% block title %}
