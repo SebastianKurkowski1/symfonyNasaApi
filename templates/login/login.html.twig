@@ -3,30 +3,37 @@
 {% block body %}
     <div class="formContainer">
         <h1 class="formHeader">Logowanie</h1>
-        <form>
+        <form action="{{ path('app_login') }}" method="post">
             {% include '/components/_input.html.twig' with {
-                name: 'login',
-                placeholder: 'Login',
+                name: '_username',
+                placeholder: 'Email',
                 type: 'text'
             } %}
 
             {% include '/components/_input.html.twig' with {
-                name: 'password',
+                name: '_password',
                 placeholder: 'Hasło',
                 type: 'password'
             } %}
 
             {% include '/components/_button.html.twig'  with {
                 text: 'Zaloguj się'
-            }%}
+            } %}
 
             <a href="{{ path('app_register') }}">Rejestracja</a>
         </form>
-
     </div>
+    {% block flash_messages %}
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endblock %}
 {% endblock %}
 
 {% block title %}
-Logowanie
+    Logowanie
 {% endblock %}
 

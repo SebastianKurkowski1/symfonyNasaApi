@@ -25,7 +25,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?string $email = null;
 
     #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -70,7 +70,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
+       return [];
     }
 
     public function eraseCredentials()
@@ -80,6 +80,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     public function getUserIdentifier(): string
     {
-        // TODO: Implement getUserIdentifier() method.
+        return $this->email;
     }
 }
