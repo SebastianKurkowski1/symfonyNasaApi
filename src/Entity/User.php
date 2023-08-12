@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -26,6 +27,9 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     public function getId(): ?int
     {
@@ -70,7 +74,9 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     public function getRoles(): array
     {
-       return [];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return $roles;
     }
 
     public function eraseCredentials()

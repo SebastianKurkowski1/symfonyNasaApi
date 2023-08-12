@@ -53,6 +53,12 @@ Encore
         config.corejs = '3.23';
     })
 
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[ext]',
+        pattern: /\.(png|jpg|jpeg|svg)$/
+    })
+
     // enables Sass/SCSS support
     //.enableSassLoader()
 

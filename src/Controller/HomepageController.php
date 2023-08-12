@@ -10,16 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
-    #[Route('/', name: 'app_homepage_homepage')]
+    #[Route('/', name: 'app_homepage')]
     public function homepage(Request $request, Login $login): Response
     {
-        if ($login->checkIfLoggedIn($request)) {
-            return $this->render('homepage/homepage.html.twig');
-        } else {
-            return $this->forward('App\Controller\LoginController::login', [
-                'request'  => $request,
-            ]);
-        }
-
+        return $this->render('homepage/homepage.html.twig');
     }
 }

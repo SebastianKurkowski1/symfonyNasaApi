@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -26,8 +27,14 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager,
+        UserInterface $loggedInUser = null): Response
     {
+        if ($loggedInUser) return $this->redirectToRoute('app_homepage');
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -64,7 +71,7 @@ class RegistrationController extends AbstractController
 
                 $this->addFlash('info', 'Wysłano maila z linkiem aktywacyjnym na podany adres.');
 
-                return $this->redirectToRoute('app_homepage_homepage');
+                return $this->redirectToRoute('app_homepage');
             }
         }
 
@@ -99,6 +106,6 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', "Pomyślnie zweryfikowano adres email. \n\n Teraz możesz się zalogować.");
 
-        return $this->redirectToRoute('app_homepage_homepage');
+        return $this->redirectToRoute('app_homepage');
     }
 }

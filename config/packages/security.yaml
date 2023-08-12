@@ -18,8 +18,6 @@ security:
             lazy: true
             custom_authenticator:
                 - App\Security\LoginAuthenticator
-
-
             logout:
                 path: app_logout
 
@@ -34,6 +32,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '/login', roles: PUBLIC_ACCESS }
+        - { path: '/register', roles: PUBLIC_ACCESS }
+        - { path: '/verify', roles: PUBLIC_ACCESS }
+        - { path: '^/', roles: ROLE_USER }
 
 when@test:
     security:
