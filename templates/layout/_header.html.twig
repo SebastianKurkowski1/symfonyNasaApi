@@ -3,7 +3,9 @@
         <img src="{{ asset('build/images/united-kingdom-flag-icon.svg') }}" alt="britishFlag">
         <img src="{{ asset('build/images/flag-of-poland.svg') }}" alt="polishFlag">
     </a>
+    {% if app.user %}
     <a href="{{ path('app_logout') }}" class="logoutButton">
         <img src="{{ asset('build/images/logout-svgrepo-com.svg') }}" alt="logoutButton">
     </a>
+    {% endif %}
 </div>

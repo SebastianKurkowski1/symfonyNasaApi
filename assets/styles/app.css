@@ -115,7 +115,7 @@ a:hover {
     align-items: center;
     justify-content: end;
     padding: 10px;
-    gap: 10px;
+    gap: 20px;
 }
 
 .navHeader .logoutButton img{
