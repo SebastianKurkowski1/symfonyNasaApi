@@ -25,6 +25,9 @@ class MRP
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $earth_date = null;
 
+    #[ORM\Column]
+    private ?int $rover_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +84,18 @@ class MRP
     public function setEarthDate(\DateTimeInterface $earth_date): static
     {
         $this->earth_date = $earth_date;
+
+        return $this;
+    }
+
+    public function getRoverId(): ?int
+    {
+        return $this->rover_id;
+    }
+
+    public function setRoverId(int $rover_id): static
+    {
+        $this->rover_id = $rover_id;
 
         return $this;
     }

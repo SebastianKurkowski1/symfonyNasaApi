@@ -8,6 +8,7 @@ use App\Repository\MRPRepository;
 use App\Repository\RoverRepository;
 use App\Service\Cron\APOD;
 use App\Service\Cron\MRP;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,6 +59,7 @@ class CronController extends AbstractController
                 $MRPEntity = $serializer->deserialize(json_encode($photoData), \App\Entity\MRP::class, 'json');
                 $MRPEntity->setId($photoData->id);
                 $MRPEntity->setCameraId($photoData->camera->id);
+                $MRPEntity->setRoverId($photoData->rover->id);
 
                 $duplicates = $MRPRepository->find($photoData->id);
 
@@ -70,7 +72,7 @@ class CronController extends AbstractController
                 if ($roverEntity) {
                     $roverEntity->setStatus($photoData->rover->status);
                     $roverEntity->setMaxSol($photoData->rover->max_sol);
-                    $roverEntity->setMaxDate($photoData->rover->max_date);
+                    $roverEntity->setMaxDate(new DateTime($photoData->rover->max_date));
                     $roverEntity->setTotalPhotos($photoData->rover->total_photos);
                     $entityManager->persist($roverEntity);
                 } else {
