@@ -22,6 +22,7 @@ class HomepageController extends AbstractController
     #[Route('/', name: 'app_homepage')]
     public function homepage(Request $request, RoverRepository $roverRepository, HttpClientInterface $httpClient, EntityManagerInterface $entityManager): Response
     {
+        dd($entityManager->getConnection());
         return $this->render('homepage/homepage.html.twig');
     }
 }

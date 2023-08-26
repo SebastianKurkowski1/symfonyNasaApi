@@ -35,8 +35,33 @@ class MRPRepository extends ServiceEntityRepository
             ->setMaxResults(50)
             ->setFirstResult($offset)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+    }
+
+    public function findByDateRange(string $dateFrom, string $dateTo, int $offset): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.earth_date BETWEEN :dateFrom AND :dateTo')
+            ->setParameter('dateFrom', $dateFrom)
+            ->setParameter('dateTo', $dateTo)
+            ->orderBy('m.earth_date', 'DESC')
+            ->setMaxResults(50)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getLastSol(string $roverName): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.sol')
+            ->leftJoin('App\Entity\Rover', 'r', Join::WITH, 'r.id = m.rover_id')
+            ->andWhere('r.name = :roverName')
+            ->setParameter('roverName', $roverName)
+            ->orderBy('m.sol', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
     }
 
 //    public function findOneBySomeField($value): ?MRP

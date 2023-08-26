@@ -21,20 +21,19 @@ class RoverRepository extends ServiceEntityRepository
         parent::__construct($registry, Rover::class);
     }
 
-//    /**
-//     * @return Rover[] Returns an array of Rover objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
+    /**
+     * @return Rover[] Returns an array of Rover objects
+     */
+    public function getAllRoverNames(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r.name')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Rover
 //    {

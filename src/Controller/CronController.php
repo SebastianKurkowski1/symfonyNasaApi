@@ -41,20 +41,24 @@ class CronController extends AbstractController
         return new Response('failure');
     }
 
-    #[Route('/cron/mrp', name: 'app_cron_mrp')]
+    #[Route('/cron/mrp/{roverName}/{sol}', name: 'app_cron_mrp')]
     public function fetchMRP(
-        MRP                 $MRP,
-        MRPRepository       $MRPRepository,
-        SerializerInterface $serializer,
+        MRP                    $MRP,
+        MRPRepository          $MRPRepository,
+        SerializerInterface    $serializer,
         EntityManagerInterface $entityManager,
-        RoverRepository $roverRepository,
+        RoverRepository        $roverRepository,
+        string                 $roverName,
+        int                 $sol,
     ): Response
     {
-        $data = $MRP->getData();
+        $rovers = $MRPRepository->getLastSol();
 
+        //if (!in_array($roverName, $rovers)) return new Response('Wrong rover name');
+
+        $data = $MRP->getDataBySol($roverName, $sol);
         if ($data) {
             $data = json_decode($data, false);
-
             foreach ($data->photos as $photoData) {
                 $MRPEntity = $serializer->deserialize(json_encode($photoData), \App\Entity\MRP::class, 'json');
                 $MRPEntity->setId($photoData->id);
@@ -82,9 +86,9 @@ class CronController extends AbstractController
                 $roverEntity->setId($photoData->rover->id);
 
                 $entityManager->persist($roverEntity);
-                $entityManager->flush();
-                return new Response('success');
             }
+            $entityManager->flush();
+            return new Response('success');
         }
 
         return new Response('No data fetched');
