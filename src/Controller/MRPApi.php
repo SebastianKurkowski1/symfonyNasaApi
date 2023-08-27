@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MRPApi extends AbstractController
 {
-    #[Route('/api/mrp/{roverName}/{offset}', name: 'api_mrp_rover', methods: ['POST'])]
+    #[Route('/api/mrp/{roverName}/{offset}', name: 'api_mrp_rover_and_offset', methods: ['POST'])]
     public function getMRPByRoverName(
         string        $roverName,
         int           $offset,
@@ -29,6 +29,17 @@ class MRPApi extends AbstractController
     ): JsonResponse
     {
         $MRPData = $MRPRepository->findByDateRange($dateFrom, $dateTo, $offset);
+        return $this->json($MRPData);
+    }
+
+    #[Route('/api/mrp-sol/{roverName}/{sol}', name: 'api_mrp_rover_and_sol', methods: ['POST'])]
+    public function getMRPByRoverNameAndSol(
+        string        $roverName,
+        int           $sol,
+        MRPRepository $MRPRepository,
+    ): JsonResponse
+    {
+        $MRPData = $MRPRepository->findByRoverNameAndSol($roverName, $sol);
         return $this->json($MRPData);
     }
 }

@@ -64,6 +64,19 @@ class MRPRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByRoverNameAndSol(string $roverName, int $sol): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('App\Entity\Rover', 'r', Join::WITH, 'r.id = m.rover_id')
+            ->andWhere('r.name = :roverName')
+            ->andWhere('m.sol = :sol')
+            ->setParameter('roverName', $roverName)
+            ->setParameter('sol', $sol)
+            ->orderBy('m.sol', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?MRP
 //    {
 //        return $this->createQueryBuilder('m')

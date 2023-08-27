@@ -41,7 +41,7 @@ class CronController extends AbstractController
         return new Response('failure');
     }
 
-    #[Route('/cron/mrp/{roverName}/{sol}', name: 'app_cron_mrp')]
+    #[Route('/cron/mrp/{roverName}', name: 'app_cron_mrp')]
     public function fetchMRP(
         MRP                    $MRP,
         MRPRepository          $MRPRepository,
@@ -49,14 +49,14 @@ class CronController extends AbstractController
         EntityManagerInterface $entityManager,
         RoverRepository        $roverRepository,
         string                 $roverName,
-        int                 $sol,
     ): Response
     {
-        $rovers = $MRPRepository->getLastSol();
-
+        $lastSol = $MRPRepository->getLastSol($roverName);
+        if (!$lastSol) $lastSol = 1;
+        else $lastSol = $lastSol[0]['sol'];
         //if (!in_array($roverName, $rovers)) return new Response('Wrong rover name');
 
-        $data = $MRP->getDataBySol($roverName, $sol);
+        $data = $MRP->getDataBySol($roverName, $lastSol + 1);
         if ($data) {
             $data = json_decode($data, false);
             foreach ($data->photos as $photoData) {
