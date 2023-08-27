@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
         "lexik/jwt-authentication-bundle": "^2.18",
+        "nelmio/api-doc-bundle": "^4.12",
         "stof/doctrine-extensions-bundle": "^1.8",
         "swagger-api/swagger-ui": "^5.3",
         "symfony/asset": "6.3.*",
@@ -75,7 +76,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "6.3.*"
         }
     },

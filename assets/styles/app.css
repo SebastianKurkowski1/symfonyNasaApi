@@ -113,9 +113,28 @@ a:hover {
 .navHeader {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.navHeader a{
+    color: var(--input-text-inactive);
+}
+
+.navHeader a:hover {
+    color: var(--input-text-active);
+}
+
+.navRightContainer {
     padding: 10px;
     gap: 20px;
+    display: flex;
+    font-size: 1.4rem;
+}
+
+.navTitle {
+    font-size: 2rem;
+    font-family: monospace, monospace;
 }
 
 .navHeader .logoutButton img{
@@ -139,6 +158,125 @@ a:hover {
 }
 
 
+/* Nelmio API */
+.information-container {
+    display: none;
+}
+
+.swagger-ui .scheme-container {
+    background-color: rgba(120,188,97,0.1);
+    background: transparent;
+}
+
+#swagger-ui.api-platform .opblock {
+    background-color: rgba(120,188,97,0.1);
+}
+
+.swagger-ui .opblock .opblock-summary-path {
+    color: rgb(73, 204, 144);
+}
+.swagger-ui .opblock .opblock-section-header h4 {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .opblock-description-wrapper p, .swagger-ui .opblock-external-docs-wrapper p, .swagger-ui .opblock-title_normal p {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui table thead tr td, .swagger-ui table thead tr th {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .response-col_status {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .parameter__name {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .renderedMarkdown {
+    color: rgb(73, 204, 144);
+}
+
+#swagger-ui.api-platform .tab li {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .response-control-examples__title, .swagger-ui .response-control-media-type__title {
+    color: rgb(73, 204, 144);
+    font-size: 0.9rem;
+}
+
+.swagger-ui .response-control-media-type__accept-message {
+    font-size: 0.9rem;
+}
+
+.swagger-ui .model {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .model-title {
+    color: rgb(73, 204, 144);
+}
+
+#swagger-ui.api-platform .btn {
+    background-color: rgba(105, 164, 84, 0.1);
+    border-color: rgba(105, 164, 84, 0.1);
+    color: rgb(73, 204, 144);
+}
+
+#swagger-ui.api-platform .btn:hover {
+    border-color: rgb(73, 204, 144);
+}
+
+.swagger-ui .opblock-tag {
+    color: rgb(73, 204, 144);
+}
+
+.swagger-ui .copy-to-clipboard {
+    background-color: transparent;
+}
+
+.swagger-ui .model-toggle:after {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(73deg) brightness(105%) contrast(101%);
+}
+
+#swagger-ui.api-platform .btn.execute {
+    background-color: rgba(105, 164, 84, 0.1);
+    border-color: rgba(105, 164, 84, 0.1);
+    color: rgb(73, 204, 144);
+}
+
+#swagger-ui.api-platform .btn.execute:hover {
+    border-color: rgb(73, 204, 144);
+    background-color: rgba(105, 164, 84, 0.1);
+}
+
+.swagger-ui .response-col_links {
+    display: none;
+}
+
+.swagger-ui .opblock .opblock-summary .view-line-link.copy-to-clipboard {
+    display: none;
+}
+
+.swagger-ui svg {
+    filter: invert(68%) sepia(27%) saturate(831%) hue-rotate(100deg) brightness(98%) contrast(88%);
+}
+
+.swagger-ui .dialog-ux .modal-ux {
+    background-color: rgba(16,20,19,255);
+    border-color: rgb(73, 204, 144);
+}
+
+.swagger-ui .dialog-ux .modal-ux-header {
+    border-color: rgb(73, 204, 144);
+}
+
+.swagger-ui .dialog-ux .modal-ux-header h3 {
+    color: rgb(73, 204, 144);
+}
 
 /* Colors */
 /* Assuming you'll use CSS custom properties or variables */

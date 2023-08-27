@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Login - Nasa API
+{% endblock %}
+
 {% block body %}
     <div class="formContainer">
-        <h1 class="formHeader">Logowanie</h1>
+        <h1 class="formHeader">Login</h1>
         <form action="{{ path('app_login') }}" method="post">
             {% include '/components/_input.html.twig' with {
                 name: '_email',
@@ -12,20 +16,18 @@
 
             {% include '/components/_input.html.twig' with {
                 name: '_password',
-                placeholder: 'Hasło',
+                placeholder: 'Password',
                 type: 'password'
             } %}
 
             {% include '/components/_button.html.twig'  with {
-                text: 'Zaloguj się'
+                text: 'Log in'
             } %}
 
-            <a href="{{ path('app_register') }}">Rejestracja</a>
+            <a href="{{ path('app_register') }}">Register</a>
         </form>
     </div>
 {% endblock %}
 
-{% block title %}
-    Logowanie
-{% endblock %}
+
 

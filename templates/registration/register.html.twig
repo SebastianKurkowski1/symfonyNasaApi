@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register - Nasa API{% endblock %}
 
 {% block body %}
     <div class="formContainer">
-        <h1 class="formHeader">Rejestracja</h1>
+        <h1 class="formHeader">Registration</h1>
 
         {{ form_errors(registrationForm) }}
 
@@ -20,8 +20,8 @@
                 {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Hasło'}}) }}
             </label>
         </div>
-        <button type="submit" class="button">Zarejestruj się</button>
-        <a href="{{ path('app_login') }}">Logowanie</a>
+        <button type="submit" class="button">Register</button>
+        <a href="{{ path('app_login') }}">Log in</a>
         {{ form_end(registrationForm) }}
     </div>
 {% endblock %}
