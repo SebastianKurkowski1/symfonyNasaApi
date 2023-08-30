@@ -157,6 +157,22 @@ a:hover {
     }
 }
 
+.errorEngraved {
+    font-family: monospace, monospace;
+    font-size: 6em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+    background: #575757;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-align: center;
+    text-shadow: -2px 1px 6px var(--input-text-inactive);
+}
+
 
 /* Nelmio API */
 .information-container {

@@ -21,7 +21,7 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Proszę podać email',
+                        'message' => 'Please provide an email',
                     ]),
                 ],
 
@@ -33,11 +33,11 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Proszę podać hasło',
+                        'message' => 'Please enter a password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Twoje hasło powinno mieć minimum {{ limit }} znaków',
+                        'minMessage' => 'Your password should be at least {{ limit }} characters long',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

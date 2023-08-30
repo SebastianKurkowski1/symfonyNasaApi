@@ -1,0 +1,21 @@
+name: Staging deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: multiple SSH commands
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script:
+            cd nasaapi.pl
+            git checkout main
+            git pull
+            php composr.phar install
