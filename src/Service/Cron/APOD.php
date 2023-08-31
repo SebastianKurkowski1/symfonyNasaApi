@@ -18,13 +18,17 @@ class APOD
     {
     }
 
-    public function getData(): string|false
+    public function getData(string|null $date = null): string|false
     {
+        if (!$date) {
+            $date = new \DateTime();
+            $date = $date->format('Y-m-d');
+        }
 
         try {
             $response = $this->client->request(
                 'GET',
-                "https://api.nasa.gov/planetary/apod?api_key={$_ENV['NASA_API_KEY']}",
+                "https://api.nasa.gov/planetary/apod?api_key={$_ENV['NASA_API_KEY']}&date=$date",
             );
             return $response->getContent();
         } catch (TransportExceptionInterface|ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface $e) {

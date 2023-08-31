@@ -10,6 +10,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 #[ORM\Entity(repositoryClass: RoverRepository::class)]
 class Rover
 {
+    const ROVERS = ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'];
     use TimestampableEntity;
     #[ORM\Id]
     #[ORM\Column]
