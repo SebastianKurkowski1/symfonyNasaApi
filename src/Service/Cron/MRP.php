@@ -5,6 +5,7 @@ namespace App\Service\Cron;
 use App\Entity\Rover;
 use App\Repository\MRPRepository;
 use App\Repository\RoverRepository;
+use App\Service\IdGenerator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -37,12 +38,37 @@ class MRP
             if (!$lastSol) $lastSol = 1;
             else $lastSol = $lastSol[0]['sol'];
 
+            $maxSol = $this->roverRepository->getMaxSolByName($rover);
+
+            if ($lastSol + 1 > $maxSol) {
+                $logData[] = "Already fetched every photo taken by $rover max sol was " . ($maxSol);
+                continue;
+            }
+
             $data = self::getDataBySol($rover, $lastSol + 1);
+
             if ($data) {
                 $data = json_decode($data, false);
+
+                if (empty($data->photos)) {
+                    $roverId = $this->roverRepository->getRoverIdByName($rover);
+                    $MRPEntity = new \App\Entity\MRP();
+                    $uniqueID = IdGenerator::generateIdAsInteger();
+                    $MRPEntity->setId($uniqueID);
+                    $MRPEntity->setSol($lastSol + 1);
+                    $MRPEntity->setRoverId($roverId);
+                    $this->entityManager->persist($MRPEntity);
+                    $this->entityManager->flush();
+
+                    $logData[] = "Successfully fetched $rover sol " . ($lastSol + 1) . " but there were no photos taken this day";
+
+                    continue;
+                }
+
+
                 foreach ($data->photos as $photoData) {
                     $MRPEntity = $this->serializer->deserialize(json_encode($photoData), \App\Entity\MRP::class, 'json');
-                    $MRPEntity->setId($photoData->id);
+                    $MRPEntity->setId((string)$photoData->id);
                     $MRPEntity->setCameraId($photoData->camera->id);
                     $MRPEntity->setRoverId($photoData->rover->id);
 
@@ -50,6 +76,7 @@ class MRP
 
                     if ($duplicates) {
                         $logData[] = ["Duplicate value $rover"];
+
                         continue;
                     }
 

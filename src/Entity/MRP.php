@@ -10,22 +10,22 @@ use Doctrine\ORM\Mapping as ORM;
 class MRP
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
     private ?int $id = null;
 
     #[ORM\Column]
     private ?int $sol = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $camera_id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $img_src = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $earth_date = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $rover_id = null;
 
     public function getId(): ?int

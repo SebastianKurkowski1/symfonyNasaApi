@@ -35,6 +35,28 @@ class RoverRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getRoverIdByName(string $roverName): int
+    {
+        $data = $this->createQueryBuilder('r')
+            ->select('r.id')
+            ->andWhere('r.name = :roverName')
+            ->setParameter('roverName', $roverName)
+            ->getQuery()
+            ->getResult();
+        return $data[0]['id'];
+    }
+
+    public function getMaxSolByName(string $roverName): int
+    {
+        $data = $this->createQueryBuilder('r')
+            ->select('r.max_sol')
+            ->andWhere('r.name = :roverName')
+            ->setParameter('roverName', $roverName)
+            ->getQuery()
+            ->getResult();
+        return $data[0]['max_sol'];
+    }
+
 //    public function findOneBySomeField($value): ?Rover
 //    {
 //        return $this->createQueryBuilder('r')
