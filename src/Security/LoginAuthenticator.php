@@ -43,11 +43,11 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
                 $user = $this->user->findOneBy(['email' => $userIdentifier]);
 
                 if (!$user) {
-                    throw new AuthenticationCredentialsNotFoundException('Nie ma użytkownika o takim loginie i haśle');
+                    throw new AuthenticationCredentialsNotFoundException('Wrong credentials');
                 }
 
                 if (!$user->isVerified()) {
-                    throw new CustomUserMessageAccountStatusException('Zweryfikuj swój email przed zalogowaniem');
+                    throw new CustomUserMessageAccountStatusException('Verify your email before you log in');
                 }
 
                 return $user;

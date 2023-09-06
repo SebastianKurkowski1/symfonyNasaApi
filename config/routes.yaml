@@ -5,7 +5,7 @@ controllers:
     type: attribute
 app_logout:
     path: /logout
-api_login_check:
+api_login:
     path: /api/login_check
 app.swagger_ui:
     path: /doc

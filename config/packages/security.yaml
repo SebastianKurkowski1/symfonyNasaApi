@@ -16,12 +16,12 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
+            login_throttling:
+                max_attempts: 3
             pattern: ^/api/login
             stateless: true
-            json_login:
-                check_path: /api/login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            custom_authenticators:
+                - App\Security\ApiLoginAuthenticator
         api:
             pattern: ^/api
             stateless: true
@@ -29,8 +29,11 @@ security:
 
         main:
             lazy: true
-            custom_authenticator:
+            login_throttling:
+                max_attempts: 3
+            custom_authenticators:
                 - App\Security\LoginAuthenticator
+                - App\Security\ApiLoginAuthenticator
             logout:
                 path: app_logout
 
