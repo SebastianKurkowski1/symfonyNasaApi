@@ -7,9 +7,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -38,6 +40,7 @@ class ApiLoginAuthenticator implements InteractiveAuthenticatorInterface
 
     public function __construct(
         private readonly JWTTokenManagerInterface $JWTTokenManager,
+        private readonly RateLimiterFactory $jwtGenerationLimiter,
         HttpUtils                                 $httpUtils,
         UserProviderInterface                     $userProvider,
         AuthenticationFailureHandlerInterface     $failureHandler = null,
@@ -91,6 +94,12 @@ class ApiLoginAuthenticator implements InteractiveAuthenticatorInterface
             $passport->addBadge(new PasswordUpgradeBadge($credentials['password'], $this->userProvider));
         }
 
+        $limiter = $this->jwtGenerationLimiter->create($request->getClientIp());
+
+        if (false === $limiter->consume(1)->isAccepted()) {
+            throw new TooManyRequestsHttpException(null, "You've already generated JWT token, try again in 5 minutes.");
+        }
+
         return $passport;
     }
 
@@ -101,7 +110,10 @@ class ApiLoginAuthenticator implements InteractiveAuthenticatorInterface
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): JsonResponse
     {
-        return new JsonResponse(['token' => $this->JWTTokenManager->create($token->getUser())]);
+        $token = $this->JWTTokenManager->create($token->getUser());
+
+
+        return new JsonResponse(['token' => $token]);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response

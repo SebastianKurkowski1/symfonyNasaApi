@@ -37,6 +37,8 @@ nelmio_api_doc:
                             description: Invalid credentials
                         '400':
                             description: Invalid JSON.
+                        '429':
+                            description: Too many tokens generated
                     security: [ ]
     areas: # to filter documented areas
         path_patterns:

@@ -4,3 +4,11 @@ framework:
       policy: 'fixed_window'
       limit: 2
       interval: '1 minutes'
+    jwt_generation:
+      policy: 'fixed_window'
+      limit: 2
+      interval: '5 minutes'
+    authenticated_api:
+      policy: 'fixed_window'
+      limit: 5
+      interval: '60 minutes'
