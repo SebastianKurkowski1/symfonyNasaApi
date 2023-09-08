@@ -53,8 +53,8 @@ security:
         - { path: '/verify', roles: PUBLIC_ACCESS }
         - { path: '^/api', roles: IS_AUTHENTICATED_FULLY }
         - { path: '^/api/login', roles: PUBLIC_ACCESS }
-        - { path: '/doc', roles: PUBLIC_ACCESS}
-        - { path: '^/', roles: ROLE_USER }
+        - { path: '/doc', roles: ROLE_USER }
+        - { path: '/', roles: PUBLIC_ACCESS }
 
 when@test:
     security:

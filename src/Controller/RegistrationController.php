@@ -28,10 +28,10 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request,
+        Request                     $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager,
-        UserInterface $loggedInUser = null): Response
+        EntityManagerInterface      $entityManager,
+        UserInterface               $loggedInUser = null): Response
     {
         if ($loggedInUser) return $this->redirectToRoute('app_homepage');
 
@@ -64,12 +64,12 @@ class RegistrationController extends AbstractController
                     (new TemplatedEmail())
                         ->from(new Address('nasaapi@nasaapi.pl', 'Nasa API'))
                         ->to($user->getEmail())
-                        ->subject('Proszę potwierdzić swój adres email')
+                        ->subject('Please confirm your email')
                         ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
                 // do anything else you need here, like send an email
 
-                $this->addFlash('info', 'Wysłano maila z linkiem aktywacyjnym na podany adres.');
+                $this->addFlash('info', 'An e-mail with an activation link has been sent to the provided address.');
 
                 return $this->redirectToRoute('app_homepage');
             }
@@ -104,7 +104,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', "Pomyślnie zweryfikowano adres email. \n\n Teraz możesz się zalogować.");
+        $this->addFlash('success', "Email address verified successfully. \n\n You can now log in.");
 
         return $this->redirectToRoute('app_homepage');
     }

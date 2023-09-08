@@ -3,8 +3,11 @@
         <a href="{{ path('app_homepage') }}">Nasa API</a>
     </div>
     <div class="navRightContainer">
-        <a href="{{ path('app.swagger_ui') }}">Documentation</a>
+        {% if not app.user %}
+            <a href="{{ path('app_login') }}">Login</a>
+        {% endif %}
         {% if app.user %}
+        <a href="{{ path('app.swagger_ui') }}">Documentation</a>
             <a href="{{ path('app_logout') }}" class="logoutButton">
                 <img src="{{ asset('build/images/logout-svgrepo-com.svg') }}" alt="logoutButton">
             </a>

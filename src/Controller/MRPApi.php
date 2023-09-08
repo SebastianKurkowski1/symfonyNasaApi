@@ -15,7 +15,12 @@ class MRPApi extends AbstractController
     #[OA\Tag('MRP')]
     #[OA\Response(
         response: 200,
-        description: 'Returns array of Mars pictures from specified rover',
+        description: "Returns array of Mars pictures from specified rover <br> <br>
+        Available rovers: <br>
+        - Curiosity <br>
+        - Opportunity <br>
+        - Spirit <br>
+        - Perseverance",
         content: new Model(type: MRP::class)
     )]
     #[Route('/api/mrp/{roverName}/{offset}', name: 'api_mrp_rover_and_offset', methods: ['POST'])]
@@ -51,7 +56,12 @@ class MRPApi extends AbstractController
     #[OA\Tag('MRP')]
     #[OA\Response(
         response: 200,
-        description: 'Returns array of Mars pictures from specified rover and his date of mission',
+        description: "Returns array of Mars pictures from specified rover and its day of mission <br><br>
+         Available rovers: <br>
+        - Curiosity <br>
+        - Opportunity <br>
+        - Spirit <br>
+        - Perseverance",
         content: new Model(type: MRP::class)
     )]
     #[Route('/api/mrp-sol/{roverName}/{sol}', name: 'api_mrp_rover_and_sol', methods: ['POST'])]

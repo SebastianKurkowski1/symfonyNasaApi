@@ -49,6 +49,38 @@ body {
     background-image: radial-gradient(circle at 0% 0%, #090202, #050511 51%, rgb(7, 1, 1));
 }
 
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.contentWrapper {
+    padding: 20px;
+    background-color: rgba(105, 164, 84, 0.1);
+    border-color: rgba(105, 164, 84, 0.1);
+    color: rgb(73, 204, 144);
+    border-width: 2px;
+    border-style: solid;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.contentWrapper h1{
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.contentWrapper p{
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    line-height: 2rem;
+    margin-left: 10px;
+    text-indent: each-line;
+}
+
 .formContainer {
     min-height: 80vh;
     display: flex;
@@ -213,6 +245,7 @@ a:hover {
 
 .swagger-ui .renderedMarkdown {
     color: rgb(73, 204, 144);
+    font-size: 1rem;
 }
 
 #swagger-ui.api-platform .tab li {

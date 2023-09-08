@@ -34,8 +34,10 @@ class CustomJWTAuthenticator extends JWTAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $limiter = $this->rateLimiter->create($this->security->getUser()->getUserIdentifier());
+        $userRoles = $this->security->getUser()->getRoles();
 
-        $limit = $limiter->consume();
+        if (!in_array('premium', $userRoles)) $limit = $limiter->consume();
+        else $limit = $limiter->consume(0);
 
         $headers = [
             'X-RateLimit-Remaining' => $limit->getRemainingTokens(),
@@ -44,7 +46,7 @@ class CustomJWTAuthenticator extends JWTAuthenticator
         ];
 
         if (false === $limit->isAccepted()) {
-            return new Response('API request limit exhausted', Response::HTTP_TOO_MANY_REQUESTS, $headers);
+            return new Response('API requests limit reached', Response::HTTP_TOO_MANY_REQUESTS, $headers);
         }
 
         return parent::onAuthenticationSuccess($request, $token, $firewallName);
