@@ -53,10 +53,11 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    padding: 15px;
 }
 
 .contentWrapper {
-    padding: 20px;
+    padding: 25px;
     background-color: rgba(105, 164, 84, 0.1);
     border-color: rgba(105, 164, 84, 0.1);
     color: rgb(73, 204, 144);
@@ -71,6 +72,20 @@ body {
 .contentWrapper h1{
     letter-spacing: 3px;
     text-align: center;
+}
+
+.contentWrapper h2, h3, h4, h5{
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.contentWrapper ul{
+    margin-left: 10px;
+}
+
+.contentWrapper li{
+    list-style: circle;
+    margin-left: 10px;
 }
 
 .contentWrapper p{
