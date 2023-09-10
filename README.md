@@ -3,7 +3,7 @@
 
 This project was created to make access to data from the official NASA API easier and unlimited.
 I've chosen APIs that I found interesting and those which instantly sparked ideas in my mind on how to use and visualize them. If you want to use any other NASA API that is not included on my page let me know through email: nasaapi@nasaapi.pl, and I'll consider adding it.
-I bet it is easy to find out, but everything about space is just awesome for me and exploring it further makes me excited.
+I bet it is easy to find out, but everything about space is just awesome for me and exploring it further makes me excited. Page is running in production environment on https://nasaapi.pl
 
 
 
