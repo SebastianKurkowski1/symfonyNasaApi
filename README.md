@@ -12,7 +12,7 @@ I bet it is easy to find out, but everything about space is just awesome for me 
 
 ## Installation
 
-Clone project from GitHub repostiory
+Clone project from GitHub repository
 
 ### .env-example
 Fill up .env-example in main directory with necessary data. \
@@ -46,7 +46,7 @@ Then create build directory with
 
 If you don't have docker installed get it from https://www.docker.com/
 
-After you're done setting up doceker run
+After you're done setting up docker run
 
 ```bash
   docker-compose up
