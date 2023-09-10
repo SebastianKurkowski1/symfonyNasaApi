@@ -141,6 +141,12 @@ form a {
     font-size: 1.3rem;
 }
 
+@media only screen and (max-width: 600px) {
+    form a {
+        margin: -0.5rem auto -0.5rem 10px;
+    }
+}
+
 .flashMessagesContainer {
     font-size: 1.5rem;
     max-width: 400px;
