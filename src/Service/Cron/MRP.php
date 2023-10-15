@@ -29,23 +29,21 @@ class MRP
     {
     }
 
-    public function fetchDataForAllRovers(): array
+    public function fetchDataForAllRovers(null | string $sol): array
     {
         $logData = [];
 
         foreach (Rover::ROVERS as $rover) {
             $lastSol = $this->MRPRepository->getLastSol($rover);
-            if (!$lastSol) $lastSol = 1;
+            if (!$lastSol) $lastSol = 0;
             else $lastSol = $lastSol[0]['sol'];
 
-            $maxSol = $this->roverRepository->getMaxSolByName($rover);
-
-            if ($lastSol + 1 > $maxSol) {
-                $logData[] = "Already fetched every photo taken by $rover max sol was " . ($maxSol);
-                continue;
+            if ($sol === null) {
+                $data = self::getDataBySol($rover, $lastSol + 1);
+            } else {
+                $data = self::getDataBySol($rover, $sol);
             }
 
-            $data = self::getDataBySol($rover, $lastSol + 1);
 
             if ($data) {
                 $data = json_decode($data, false);

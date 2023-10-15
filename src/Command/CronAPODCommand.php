@@ -29,7 +29,7 @@ class CronAPODCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('date', '-d', InputOption::VALUE_REQUIRED, 'Date to fetch APOD from formay YYYY-mm-dd')
+            ->addOption('date', '-d', InputOption::VALUE_REQUIRED, 'Date to fetch APOD from format YYYY-mm-dd')
         ;
     }
 

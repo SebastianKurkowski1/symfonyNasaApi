@@ -23,14 +23,16 @@ class CronMRPCommand extends Command
 
     protected function configure(): void
     {
-
+        $this->addOption('sol', '-s', InputOption::VALUE_OPTIONAL, 'Fetch photos from specified sol');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $data = $this->MRP->fetchDataForAllRovers();
+        $sol = $input->getOption('sol');
+
+        $data = $this->MRP->fetchDataForAllRovers($sol);
 
         if (!empty($data)) {
             foreach ($data as $info) {

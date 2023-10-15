@@ -23,12 +23,27 @@ class APODApi extends AbstractController
         content: new Model(type: APOD::class),
     )]
     #[Route('/api/apod/{date}', name: 'api_apod', methods: ['POST'])]
-    public function getMRP(
+    public function getAPOD(
         string         $date,
         APODRepository $APODRepository,
     ): JsonResponse
     {
         $MRPData = $APODRepository->findOneBy(['date' => $date]);
         return $this->json($MRPData);
+    }
+
+    #[OA\Tag('APOD')]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns available range of astronomy pictures of the day',
+    )]
+    #[Route('/api/apod-range', name: 'api_range', methods: ['POST'])]
+    public function getAPODRange(
+        APODRepository $APODRepository,
+    ): JsonResponse
+    {
+        $firstAPOD = $APODRepository->findOneBy([], ['date' => 'ASC']);
+        $lastAPOD = $APODRepository->findOneBy([], ['date' => 'DESC']);
+        return $this->json(['first' => $firstAPOD->getDate(), 'last' =>$lastAPOD->getDate()]);
     }
 }

@@ -57,6 +57,7 @@ class RoverRepository extends ServiceEntityRepository
         return $data[0]['max_sol'];
     }
 
+
 //    public function findOneBySomeField($value): ?Rover
 //    {
 //        return $this->createQueryBuilder('r')
